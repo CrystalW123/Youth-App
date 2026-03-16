@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 import os
+from utils.styles import apply_custom_styles
+
+apply_custom_styles()
+
+st.sidebar.title("Youth Hub")
+st.sidebar.caption("Bible engagement for youth")
+st.sidebar.markdown("---")
 
 st.title("Leader Dashboard 📊")
 st.write("View engagement and usage across the app.")

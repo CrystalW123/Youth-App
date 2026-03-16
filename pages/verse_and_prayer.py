@@ -5,6 +5,13 @@ from utils.bible_reader import get_verse_text
 from utils.llm import generate_explanation_and_prayer
 from utils.fallback import generate_fallback_content
 from utils.storage import log_event
+from utils.styles import apply_custom_styles
+
+apply_custom_styles()
+
+st.sidebar.title("Youth Hub")
+st.sidebar.caption("Bible engagement for youth")
+st.sidebar.markdown("---")
 
 st.title("Verse & Prayer 🙏")
 st.write("Choose a topic and get a Bible verse and encouragement.")

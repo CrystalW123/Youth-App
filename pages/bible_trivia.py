@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 import random
 from utils.storage import log_event
+from utils.styles import apply_custom_styles
+
+apply_custom_styles()
+
+st.sidebar.title("Youth Hub")
+st.sidebar.caption("Bible engagement for youth")
+st.sidebar.markdown("---")
 
 st.title("Bible Trivia ❓")
 st.write("Test your Bible knowledge one question at a time.")
