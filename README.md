@@ -1,5 +1,7 @@
 # Youth Bible Engagement App 🙏🏿
 
+![App](data/image/App-Image.png)
+
 A lightweight interactive web app designed to increase Bible engagement among youth (ages 18–30) through trivia, daily encouragement, and simple reflection tools.
 
 The app combines Bible-based interaction, AI-assisted encouragement, and engagement analytics to support youth ministries in making Scripture interaction more consistent and engaging.
@@ -122,6 +124,10 @@ The World English Bible is in the public domain, which allows it to be freely us
 The JSON Bible files used in this project come from that repository.
 
 All credit for the translation belongs to the original maintainers of the World English Bible.
+
+The questions come from [Logos Bible Trivia](https://www.logos.com/grow/100-bible-trivia-questions/) and [Minsitry to Children](https://ministry-to-children.com/kids-bible-trivia/)
+
+
 
 ## Technology Stack ⚙️
 

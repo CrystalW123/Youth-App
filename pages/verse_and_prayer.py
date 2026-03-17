@@ -13,7 +13,7 @@ st.sidebar.title("Youth Hub")
 st.sidebar.caption("Bible engagement for youth")
 st.sidebar.markdown("---")
 
-st.title("Verse & Prayer 🙏")
+st.title("Verse for the day 🙏")
 st.write("Choose a topic and get a Bible verse and encouragement.")
 
 with open("data/topic_to_verses.json", "r", encoding="utf-8") as file:
@@ -28,7 +28,6 @@ defaults = {
     "selected_verse_reference": None,
     "selected_verse_text": None,
     "generated_explanation": None,
-    "generated_prayer": None,
     "generated_reflection_question": None,
     "llm_error": None,
     "used_fallback": False,
@@ -44,7 +43,6 @@ if st.session_state.selected_topic != selected_topic:
     st.session_state.selected_verse_reference = None
     st.session_state.selected_verse_text = None
     st.session_state.generated_explanation = None
-    st.session_state.generated_prayer = None
     st.session_state.generated_reflection_question = None
     st.session_state.llm_error = None
     st.session_state.used_fallback = False
@@ -57,7 +55,6 @@ if st.button("Get Verse"):
     st.session_state.selected_verse_reference = None
     st.session_state.selected_verse_text = None
     st.session_state.generated_explanation = None
-    st.session_state.generated_prayer = None
     st.session_state.generated_reflection_question = None
     st.session_state.llm_error = None
     st.session_state.used_fallback = False
@@ -80,7 +77,6 @@ if st.button("Get Verse"):
             verse_text=verse_text
         )
         st.session_state.generated_explanation = llm_output.get("explanation")
-        st.session_state.generated_prayer = llm_output.get("prayer")
         st.session_state.generated_reflection_question = llm_output.get("reflection_question")
 
     except Exception as e:
@@ -91,7 +87,6 @@ if st.button("Get Verse"):
             reference=chosen_reference
         )
         st.session_state.generated_explanation = fallback_output["explanation"]
-        st.session_state.generated_prayer = fallback_output["prayer"]
         st.session_state.generated_reflection_question = fallback_output["reflection_question"]
         st.session_state.used_fallback = True
 
@@ -104,7 +99,7 @@ if st.button("Get Verse"):
     )
 
 if st.session_state.selected_verse_reference:
-    st.subheader("Selected Verse for You")
+    st.subheader("Selected Verse for You (WEB)")
     st.write(f"**{st.session_state.selected_verse_reference}**")
     st.text(st.session_state.selected_verse_text)
 
@@ -115,9 +110,6 @@ if st.session_state.selected_verse_reference:
         st.markdown("### Short Explanation")
         st.write(st.session_state.generated_explanation)
 
-    if st.session_state.generated_prayer:
-        st.markdown("### Prayer")
-        st.write(st.session_state.generated_prayer)
 
     if st.session_state.generated_reflection_question:
         st.markdown("### Reflection Question")

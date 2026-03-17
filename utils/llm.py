@@ -37,12 +37,10 @@ Verse Text: {verse_text}
 
 Return valid JSON with exactly these keys:
 - explanation
-- prayer
 - reflection_question
 
 Rules:
 - explanation: 2 short sentences, simple language for young adults
-- prayer: 2 short sentences
 - reflection_question: 1 thoughtful question
 - stay grounded in the verse provided
 - do not invent extra Bible references

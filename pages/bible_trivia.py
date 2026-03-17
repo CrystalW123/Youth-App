@@ -13,6 +13,9 @@ st.sidebar.markdown("---")
 st.title("Bible Trivia ❓")
 st.write("Test your Bible knowledge one question at a time.")
 
+st.sidebar.markdown("---")
+st.sidebar.caption("Trivia questions sourced from Logos Bible Trivia And Ministry to Children")
+
 # Load CSV
 df = pd.read_csv("data/trivia_questions.csv")
 df = df.reset_index().rename(columns={"index": "question_id"})
