@@ -20,16 +20,41 @@ st.markdown(
     "A Bible engagement app built to make Scripture interaction more consistent, fun, and meaningful."
 )
 
+st.markdown("""
+<style>
+div.stButton > button {
+    height: 120px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    padding: 16px;
+    white-space: pre-line;
+}
+div.stButton > button:hover {
+    background-color: rgba(255,0,0,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+}
+div.stButton > button {
+    transition: all 0.2s ease;
+}
+</style>
+""", unsafe_allow_html=True)
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.info("**Bible Trivia**\n\nTest your Bible knowledge one question at a time.")
+    if st.button("📊 Bible Trivia\n\nTest your Bible knowledge one question at a time", use_container_width=True):
+        st.switch_page("pages/bible_trivia.py")
 
 with col2:
-    st.info("**Verse & Prayer**\n\nGet encouragement based on real-life topics.")
+    if st.button("🙏 Verse & Prayer\n\nGet encouragement based on real life topics", use_container_width=True):
+        st.switch_page("pages/verse_prayer.py")
 
 with col3:
-    st.info("**Dashboard**\n\nTrack engagement and see what youth are interacting with.")
+    if st.button("📈 Dashboard\n\nView engagement insights and see what youth are interacting with", use_container_width=True):
+        st.switch_page("pages/leader_dashboard.py")
 
 st.markdown("---")
 st.success("Use the sidebar to explore the app.")
