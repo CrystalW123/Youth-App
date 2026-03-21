@@ -50,7 +50,7 @@ with col1:
 
 with col2:
     if st.button("🙏 Verse & Prayer\n\nGet encouragement based on real life topics", use_container_width=True):
-        st.switch_page("pages/verse_prayer.py")
+        st.switch_page("pages/verse_and_prayer.py")
 
 with col3:
     if st.button("📈 Dashboard\n\nView engagement insights and see what youth are interacting with", use_container_width=True):
