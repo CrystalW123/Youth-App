@@ -10,6 +10,28 @@ st.sidebar.caption("Bible engagement for youth")
 st.sidebar.markdown("---")
 
 st.title("Leader Dashboard 📊")
+
+dashboard_password = st.secrets.get("LEADER_DASHBOARD_PASSWORD")
+
+if "leader_access_granted" not in st.session_state:
+    st.session_state.leader_access_granted = False
+
+if not st.session_state.leader_access_granted:
+    st.warning("This page is only available to the youth leaders.")
+
+    entered_password = st.text_input(
+        "Enter leader password",
+        type="password"
+    )
+
+    if st.button("Unlock Dashboard"):
+        if entered_password == dashboard_password:
+            st.session_state.leader_access_granted = True
+            st.rerun()
+        else:
+            st.error("Incorrect password.")
+
+    st.stop()
 st.write("View engagement and usage across the app.")
 
 log_file = "data/usage_log.csv"

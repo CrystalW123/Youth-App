@@ -218,6 +218,17 @@ if not st.session_state.answered:
             if is_correct:
                 st.session_state.score[difficulty] += 1
 
+            if "session_trivia_attempts" not in st.session_state:
+                st.session_state.session_trivia_attempts = 0
+
+            if "session_trivia_correct" not in st.session_state:
+                st.session_state.session_trivia_correct = 0
+
+            st.session_state.session_trivia_attempts += 1
+
+            if is_correct:
+                st.session_state.session_trivia_correct += 1
+
             log_event(
                 page="trivia",
                 event_type="trivia_answer",

@@ -42,18 +42,22 @@ div.stButton > button {
 </style>
 """, unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    if st.button("📊 Bible Trivia\n\nTest your Bible knowledge one question at a time", use_container_width=True):
+    if st.button("📖 Bible Trivia\n\nTest your Bible knowledge", use_container_width=True):
         st.switch_page("pages/bible_trivia.py")
 
 with col2:
-    if st.button("🙏 Verse & Prayer\n\nGet encouragement based on real life topics", use_container_width=True):
+    if st.button("🙏 Verse & Prayer\n\nGet encouragement", use_container_width=True):
         st.switch_page("pages/verse_and_prayer.py")
 
 with col3:
-    if st.button("📈 Dashboard\n\nView engagement insights and see what youth are interacting with", use_container_width=True):
+    if st.button("✨ My Dashboard\n\nSee your session activity", use_container_width=True):
+        st.switch_page("pages/user_dashboard.py")
+
+with col4:
+    if st.button("🔒 Leader Dashboard\n\nOnly available to youth leaders", use_container_width=True):
         st.switch_page("pages/leader_dashboard.py")
 
 st.markdown("---")

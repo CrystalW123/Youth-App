@@ -145,6 +145,19 @@ if get_verse_clicked or try_another_clicked:
     st.session_state.used_fallback = result["used_fallback"]
     st.session_state.is_generating = False
 
+    if "session_verse_requests" not in st.session_state:
+        st.session_state.session_verse_requests = []
+
+    if "session_topics_used" not in st.session_state:
+        st.session_state.session_topics_used = []
+
+    if "session_last_reflection_question" not in st.session_state:
+        st.session_state.session_last_reflection_question = None
+
+    st.session_state.session_verse_requests.append(chosen_reference)
+    st.session_state.session_topics_used.append(selected_topic)
+    st.session_state.session_last_reflection_question = st.session_state.generated_reflection_question
+
     log_event(
         page="verse",
         event_type="verse_request",
