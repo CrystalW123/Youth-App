@@ -3,7 +3,8 @@
 ![App](data/image/App-Image.png)
 
 
-[Link to the app](https://youth-app.streamlit.app/)
+[Link to the app](https://youth-app.streamlit.app/). 
+
 A lightweight interactive web app designed to increase Bible engagement among youth (ages 18–30) through trivia, daily encouragement, and simple reflection tools.
 
 The app combines Bible-based interaction, AI-assisted encouragement, and engagement analytics to support youth ministries in making Scripture interaction more consistent and engaging.
@@ -37,7 +38,7 @@ Instead of expecting long reading sessions, it focuses on:
 
 - short reflection prompts
 
-- simple prayer generation
+- simple challenge generation
 
 These small interactions make Scripture engagement easier to start and repeat.
 The goal is not to replace traditional Bible study, but to encourage frequent touchpoints with Scripture.
@@ -65,16 +66,32 @@ Users can select a life topic such as:
 - Joy
 - Anxiety
 - Fear
+- Work
 
 The app will:
 
 Select a relevant Bible verse
 - Display the verse text
-- Generate a short explanation
-- Generate a short prayer
+- Generate a short challenge
 - Provide a reflection question
 
 If the AI service is unavailable, the app uses a built-in fallback encouragement system so the experience continues smoothly.
+
+## User Dashboard
+
+A simple analytics dashboard designed for users.
+
+The dashboard tracks engagement such as:
+
+- number of trivia attempts
+- accuracy across difficulty levels
+- verses viewed
+- topics explored
+- most explored topic
+- recent verses
+- latest reflection question
+
+This allows users to see their own interaction with the app.
 
 ## Leader Dashboard
 
@@ -97,13 +114,19 @@ Youth-App
 ├── app.py
 ├── pages/
 │   ├── bible_trivia.py
-│   ├── verse_prayer.py
+│   ├── verse_and_challenge.py
+│   ├── reviews.py
+│   ├── user_dashboard.py
 │   └── leader_dashboard.py
+│
 │
 ├── utils/
 │   ├── bible_reader.py
 │   ├── llm.py
 │   ├── fallback.py
+│   ├── auth.py
+│   ├── styles.py
+│   ├── trivia.py
 │   └── storage.py
 │
 ├── data/
@@ -140,6 +163,7 @@ Python
 - OpenRouter (for AI-generated explanations and prayers)
 - Local JSON Bible dataset
 - Running the App Locally
+- Supabase
 
 ### Install dependencies:
 
@@ -174,7 +198,7 @@ Potential future enhancements include:
 - user accounts for tracking engagement over time
 - streaks or daily verse notifications
 - more advanced leader analytics
-- database-backed storage instead of CSV logging
+- database-backed storage instead of CSV logging(done)
 - improved question datasets
 - optional group discussion prompts
 

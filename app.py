@@ -93,8 +93,8 @@ with col1:
         st.switch_page("pages/bible_trivia.py")
 
 with col2:
-    if st.button("🙏 Verse & Prayer\n\nGet encouragement", width="stretch"):
-        st.switch_page("pages/verse_and_prayer.py")
+    if st.button("🙏 Verse & Challenge\n\nGet encouragement", width="stretch"):
+        st.switch_page("pages/verse_and_challenge.py")
 
 with col3:
     if st.button("✨ My Dashboard\n\nSee your session activity", width="stretch"):
