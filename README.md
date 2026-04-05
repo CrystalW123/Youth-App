@@ -2,6 +2,8 @@
 
 ![App](data/image/App-Image.png)
 
+
+[Link to the app](https://youth-app.streamlit.app/)
 A lightweight interactive web app designed to increase Bible engagement among youth (ages 18–30) through trivia, daily encouragement, and simple reflection tools.
 
 The app combines Bible-based interaction, AI-assisted encouragement, and engagement analytics to support youth ministries in making Scripture interaction more consistent and engaging.
