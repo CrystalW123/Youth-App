@@ -27,7 +27,7 @@ MODELS = [
     "arcee-ai/trinity-mini:free"
 ]
 
-def generate_explanation_and_prayer(topic: str, reference: str, verse_text: str):
+def generate_challenge_and_question(topic: str, reference: str, verse_text: str):
     prompt = f"""
 You are helping generate a short, respectful and truthful Christian encouragement for a youth app.
 
@@ -36,11 +36,11 @@ Bible Reference: {reference}
 Verse Text: {verse_text}
 
 Return valid JSON with exactly these keys:
-- explanation
+- challenge
 - reflection_question
 
 Rules:
-- explanation: 2 short sentences, simple language for young adults
+- challenge: Give a challenge, like read the given chapter or reach out to show love for the day or week something related to the verse and easy to do without needing money, nothing dangerous, should be very safe
 - reflection_question: 1 thoughtful question
 - stay grounded in the verse provided
 - do not invent extra Bible references

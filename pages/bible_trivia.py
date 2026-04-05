@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
-from utils.storage import log_event
+from utils.storage import log_event, save_trivia_attempt
 from utils.styles import apply_custom_styles
 
 apply_custom_styles()
@@ -228,6 +228,13 @@ if not st.session_state.answered:
 
             if is_correct:
                 st.session_state.session_trivia_correct += 1
+
+            save_trivia_attempt(
+                difficulty=difficulty,
+                question_text=question,
+                verse_reference=verse,
+                is_correct=is_correct
+            )
 
             log_event(
                 page="trivia",
