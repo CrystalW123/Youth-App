@@ -4,3 +4,4 @@ requests==2.32.5
 python-dotenv==1.2.2
 openai==2.28.0
 supabase==2.28.3
+authlib==1.6.9
