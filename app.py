@@ -36,19 +36,9 @@ if not is_logged_in and not has_alias:
 
         if st.button("Continue as Guest", use_container_width=True):
             if alias.strip():
-                try:
-                    st.session_state.guest_alias = alias.strip()
-                    st.session_state.guest_uuid = get_guest_uuid(alias.strip())
-
-                    ensure_guest_user_exists()
-
-                    st.rerun()
-
-                except Exception:
-                    st.error("That alias is already taken. Please choose another one.")
-                    st.session_state.guest_alias = None
-                    st.session_state.guest_uuid = None
-
+                st.session_state.guest_alias = alias.strip()
+                st.session_state.guest_uuid = get_guest_uuid(alias.strip())
+                st.rerun()
             else:
                 st.warning("Please enter a name or alias to continue.")
 
