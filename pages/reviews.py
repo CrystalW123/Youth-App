@@ -1,6 +1,8 @@
 import streamlit as st
 from utils.storage import save_review
 from utils.styles import apply_custom_styles
+from utils.auth import require_access
+require_access()
 
 apply_custom_styles()
 

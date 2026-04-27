@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 from supabase import create_client, Client
+from utils.auth import should_save_activity_data
 import uuid
 
 
@@ -36,6 +37,8 @@ def log_event(
     used_fallback="",
     user_uuid=None,
 ):
+    if not should_save_activity_data():
+        return
     try:
         supabase = get_supabase()
 
@@ -61,6 +64,8 @@ def log_event(
 
 
 def save_verse_request(topic, verse_reference, used_fallback=False, challenge="", reflection_question=""):
+    if not should_save_activity_data():
+        return
     try:
         supabase = get_supabase()
         supabase.table("verse_requests").insert({
@@ -76,6 +81,8 @@ def save_verse_request(topic, verse_reference, used_fallback=False, challenge=""
 
 
 def save_trivia_attempt(difficulty, question_text, verse_reference, is_correct):
+    if not should_save_activity_data():
+        return
     try:
         supabase = get_supabase()
         supabase.table("trivia_attempts").insert({

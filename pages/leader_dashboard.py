@@ -3,6 +3,8 @@ import pandas as pd
 from datetime import datetime, timedelta, timezone
 from utils.styles import apply_custom_styles
 from utils.storage import get_supabase
+from utils.auth import require_access
+require_access()
 
 apply_custom_styles()
 

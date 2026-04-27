@@ -3,6 +3,8 @@ import pandas as pd
 from collections import Counter
 from utils.styles import apply_custom_styles
 from utils.storage import get_supabase, get_current_user_email
+from utils.auth import require_access
+require_access()
 
 apply_custom_styles()
 
@@ -69,13 +71,23 @@ with col1:
 with col2:
     st.metric("Topics Explored", topics_explored)
 
-st.markdown("## Most Explored Topic")
+st.markdown("## Your Most Explored Topic(s)")
 if not verse_df.empty:
     topic_counts = verse_df["topic"].value_counts()
-    top_topic = topic_counts.index[0]
-    top_count = topic_counts.iloc[0]
 
-    st.write(f"**{top_topic}** ({top_count} time(s))")
+    max_count = topic_counts.max()
+
+    # Get all topics with the max count
+    top_topics = topic_counts[topic_counts == max_count].index.tolist()
+
+    if len(top_topics) == 1:
+        st.write(f"**{top_topics[0]}**")
+        st.caption(f"Explored {max_count} time(s)")
+    else:
+        st.write("**Top Topics:**")
+        for topic in top_topics:
+            st.write(f"- {topic}")
+        st.caption(f"Each explored {max_count} time(s)")
 else:
     st.write("No topics explored yet.")
 

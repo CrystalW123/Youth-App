@@ -3,6 +3,8 @@ import pandas as pd
 import random
 from utils.storage import log_event, save_trivia_attempt
 from utils.styles import apply_custom_styles
+from utils.auth import require_access
+require_access()
 
 apply_custom_styles()
 

@@ -6,6 +6,8 @@ from utils.llm import generate_challenge_and_question
 from utils.fallback import generate_fallback_content
 from utils.storage import log_event, save_verse_request
 from utils.styles import apply_custom_styles
+from utils.auth import require_access
+require_access()
 
 apply_custom_styles()
 
