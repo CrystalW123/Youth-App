@@ -55,15 +55,42 @@ def verse_html(verse_text: str) -> str:
     return "".join(parts)
 
 
-@st.cache_data(ttl=3600, show_spinner=False)
-def get_verse_of_the_day(day_ordinal: int):
-    """Same verse for everyone on a given day, picked from your topic file."""
+def load_verse_of_the_day_references():
+    """
+    Hand-picked list from data/verse_of_the_day.json (edit it any time).
+    If that file is missing or empty, fall back to every verse in topic_to_verses.json.
+    """
+    try:
+        with open("data/verse_of_the_day.json", "r", encoding="utf-8") as file:
+            references = [r.strip() for r in json.load(file) if isinstance(r, str) and r.strip()]
+        if references:
+            return references
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"verse_of_the_day.json not usable, using topic verses instead: {e}")
+
     with open("data/topic_to_verses.json", "r", encoding="utf-8") as file:
         topic_map = json.load(file)
 
-    references = sorted({ref for refs in topic_map.values() for ref in refs})
-    reference = references[day_ordinal % len(references)]
-    return reference, get_verse_text(reference)
+    return sorted({ref for refs in topic_map.values() for ref in refs})
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def get_verse_of_the_day(day_ordinal: int):
+    """
+    Same verse for everyone on a given day. If a verse in the list cannot be
+    loaded (for example the book name does not match a Bible file), it is
+    skipped and the next one is used.
+    """
+    references = load_verse_of_the_day_references()
+
+    for offset in range(len(references)):
+        reference = references[(day_ordinal + offset) % len(references)]
+        try:
+            return reference, get_verse_text(reference)
+        except Exception as e:
+            print(f"Verse of the day skipped {reference}: {e}")
+
+    raise RuntimeError("No verse of the day could be loaded")
 
 
 @st.cache_data(ttl=60, show_spinner=False)

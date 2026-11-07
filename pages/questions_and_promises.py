@@ -7,7 +7,7 @@ import streamlit as st
 from utils.auth import require_access
 from utils.bible_reader import get_verse_text
 from utils.llm import generate_bible_answer
-from utils.storage import save_question_event
+from utils.storage import log_event, save_question_event
 from utils.styles import apply_custom_styles
 
 require_access()
@@ -152,6 +152,9 @@ with tab_ask:
 
                     # Save only that a question was asked, not the question itself
                     save_question_event(topic=ask_topic, event_type="question_asked")
+
+                    # Also log to usage_logs so asking a question counts toward the daily streak
+                    log_event(page="helper", event_type="question_asked", topic=ask_topic)
 
                 except Exception as e:
                     st.session_state.pop("bible_answer", None)
