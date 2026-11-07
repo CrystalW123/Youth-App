@@ -26,7 +26,8 @@ MODELS = [
     "qwen/qwen3-next-80b-a3b-instruct:free",
     "meta-llama/llama-3.3-70b-instruct:free",
     "nvidia/nemotron-3-super-120b-a12b:free",
-    "nvidia/nemotron-3-nano-30b-a3b:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "nvidia/llama-nemotron-rerank-vl-1b-v2:free",
 ]
 
 REQUEST_TIMEOUT_SECONDS = 30

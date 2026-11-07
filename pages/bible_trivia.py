@@ -1,9 +1,12 @@
-import streamlit as st
-import pandas as pd
 import random
+
+import pandas as pd
+import streamlit as st
+
+from utils.auth import is_logged_in_user, require_access
 from utils.storage import log_event, save_trivia_attempt
 from utils.styles import apply_custom_styles
-from utils.auth import require_access
+
 require_access()
 
 apply_custom_styles()
@@ -15,12 +18,21 @@ st.sidebar.markdown("---")
 st.title("Bible Trivia ❓")
 st.write("Test your Bible knowledge one question at a time.")
 
+if not is_logged_in_user():
+    st.caption("Guest mode: your scores will not be saved.")
+
 st.sidebar.markdown("---")
 st.sidebar.caption("Trivia questions sourced from Logos Bible Trivia And Ministry to Children")
 
-# Load CSV
-df = pd.read_csv("data/trivia_questions.csv")
-df = df.reset_index().rename(columns={"index": "question_id"})
+
+# Load CSV (cached so it is not re-read on every click)
+@st.cache_data(show_spinner=False)
+def load_questions():
+    data = pd.read_csv("data/trivia_questions.csv")
+    return data.reset_index().rename(columns={"index": "question_id"})
+
+
+df = load_questions()
 
 # Difficulty choice
 difficulty = st.selectbox("Choose level", ["Easy", "Medium", "Hard"])
@@ -138,7 +150,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     if not st.session_state.quiz_started:
-        if st.button("Start Quiz"):
+        if st.button("Start Quiz", type="primary", width="stretch"):
             reset_level(difficulty)
             st.session_state.quiz_started = True
             load_new_question(filtered_df, difficulty)
@@ -146,7 +158,7 @@ with col1:
 
 with col2:
     if st.session_state.quiz_started:
-        if st.button("Restart Quiz"):
+        if st.button("Restart Quiz", width="stretch"):
             reset_level(difficulty)
             load_new_question(filtered_df, difficulty)
             st.rerun()
@@ -162,10 +174,11 @@ if st.session_state.quiz_completed[difficulty]:
     final_total = total_questions
     percentage = (final_score / final_total) * 100 if final_total > 0 else 0
 
+    st.progress(1.0)
     st.success(f"You scored {final_score} out of {final_total} in {difficulty}.")
     st.metric("Percentage Score", f"{percentage:.1f}%")
 
-    if st.button("Play Again"):
+    if st.button("Play Again", type="primary", width="stretch"):
         reset_level(difficulty)
         load_new_question(filtered_df, difficulty)
         st.rerun()
@@ -189,6 +202,7 @@ current_progress = min(answered_so_far, total_questions)
 percentage_live = (score / answered_so_far * 100) if answered_so_far > 0 else 0
 
 st.caption(f"Level: {difficulty}")
+st.progress(current_progress / total_questions)
 
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -202,15 +216,22 @@ st.subheader(question)
 
 radio_key = f"selected_option_{difficulty}_{st.session_state.question_number}"
 
+# index=None means nothing is pre-selected, so the first option is not a free guess
 selected = st.radio(
     "Choose your answer:",
     options,
+    index=None,
     key=radio_key,
     disabled=st.session_state.answered
 )
 
 if not st.session_state.answered:
-    if st.button("Submit Answer"):
+    if st.button(
+        "Submit Answer",
+        type="primary",
+        width="stretch",
+        disabled=selected is None
+    ):
         st.session_state.answered = True
 
         if not st.session_state.answer_recorded:
@@ -260,7 +281,7 @@ else:
         st.write(f"The correct answer is **{correct_answer}**")
         st.write(f"Comes from the verse **{verse}**")
 
-    if st.button("Next Question"):
+    if st.button("Next Question", type="primary", width="stretch"):
         st.session_state.question_number += 1
         load_new_question(filtered_df, difficulty)
         st.rerun()
