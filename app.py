@@ -83,7 +83,7 @@ st.markdown(
     "A Bible engagement app built to make Scripture interaction more consistent, fun, and meaningful."
 )
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
     if st.button("📖 Bible Trivia\n\nTest your Bible knowledge", use_container_width=True):
@@ -94,14 +94,18 @@ with col2:
         st.switch_page("pages/verse_and_challenge.py")
 
 with col3:
+    if st.button("📖 Bible Helper\n\nAsk questions and explore promises", use_container_width=True):
+        st.switch_page("pages/questions_and_promises.py")
+
+with col4:
     if st.button("✨ My Dashboard\n\nSee your activity", use_container_width=True):
         st.switch_page("pages/user_dashboard.py")
 
-with col4:
+with col5:
     if st.button("🔒 Leader Dashboard\n\nOnly available to youth leaders", use_container_width=True):
         st.switch_page("pages/leader_dashboard.py")
 
-with col5:
+with col6:
     if st.button("Reviews\n\nPlease give your review", use_container_width=True):
         st.switch_page("pages/reviews.py")
 

@@ -105,3 +105,19 @@ def save_review(rating, review_text):
         }).execute()
     except Exception as e:
         print(f"Review insert failed: {e}")
+
+def save_question_event(topic="", event_type="question_asked"):
+    try:
+        if not should_save_activity_data():
+            return
+
+        supabase = get_supabase()
+
+        supabase.table("question_events").insert({
+            "user_uuid": get_user_uuid(),
+            "event_type": event_type,
+            "topic": topic,
+        }).execute()
+
+    except Exception as e:
+        print(f"Question event insert failed: {e}")
